@@ -1,0 +1,11 @@
+eudev
+flex make
+libinput
+libxkbcommon
+linux-headers make
+mesa 
+meson make
+pixman
+samurai make
+wayland-protocols make
+xkeyboard-config
