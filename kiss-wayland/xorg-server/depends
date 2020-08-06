@@ -1,0 +1,27 @@
+bzip2
+font-util make
+freetype-harfbuzz
+libX11
+libXau
+libXdamage
+libXext
+libXfixes
+libXfont2
+libXxf86vm
+libdrm
+libepoxy
+libfontenc
+libpciaccess
+libressl
+libxcb
+libxkbfile
+libxshmfence
+linux-headers make
+mesa
+nettle
+pixman
+wayland
+wayland-protocols make
+xkeyboard-config
+xtrans make
+zlib

@@ -1,0 +1,23 @@
+#!/bin/sh -e
+
+patch -p1 < rootless_modesetting.patch
+
+export DESTDIR="$1"
+
+meson \
+    --prefix=/usr \
+    -Dxwin=false \
+    -Dxdmcp=false \
+    -Dsecure-rpc=false \
+    -Dsystemd_logind=false \
+    -Ddri2=true \
+    -Ddri3=true \
+    -Dglx=true \
+    -Dxorg=true \
+    -Dxwayland=true \
+    . output
+
+ninja -C output
+ninja -C output install
+
+rm -f "$1/usr/share/X11/xorg.conf.d/10-evdev.conf"
