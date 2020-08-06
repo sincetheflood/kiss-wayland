@@ -1,0 +1,27 @@
+#!/bin/sh -e
+
+# Remove 'atk-bridge' dependency which removes the 'dbus' dependency.
+patch -p1 < remove-atkbridge.patch
+
+sed -i '/<atk-bridge.h>/d;/atk_bridge_adaptor_init/d' \
+    gtk/a11y/gtkaccessibility.c
+
+export DESTDIR="$1"
+
+meson \
+    --prefix=/usr \
+    -Dcolord=no \
+    -Dintrospection=false \
+    -Ddemos=false \
+    -Dexamples=false \
+    -Dtests=false \
+    -Dinstalled_tests=false \
+    . output
+
+ninja -C output
+ninja -C output install
+
+# We don't compile with librsvg which leads to this
+# utility solely causing compiler errors for some
+# packages. It has no use at all.
+rm -f "$1/usr/bin/gtk-encode-symbolic-svg"

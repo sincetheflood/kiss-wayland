@@ -1,0 +1,16 @@
+atk
+fribidi
+gdk-pixbuf
+libXcomposite
+libXcursor
+libXdamage
+libXext
+libXi
+libXinerama
+libXrandr
+libxkbcommon
+libepoxy
+pango
+python make
+wayland
+wayland-protocols make
