@@ -11,6 +11,9 @@ A KISS repository for Wayland.
 After the archival of sdsddsd1's mywayland[1] repo I needed a way to continue
 getting updates to my wayland install, and thus kiss-wayland was born.
 
+If a package you used/want is missing, feel free to make a pr adding it the
+repo, so far I've only got the ones I use added.
+
 To use this repo you should have the following repositories in your KISS_PATH:
  - kisslinux/repo/*     [2]
  - kisslinux/community  [3]
