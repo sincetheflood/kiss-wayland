@@ -1,12 +1,12 @@
-Personal |/
-         |\ISS Repo                                             https://k1ss.org
+|/
+|\ISS Repo                                                      https://k1ss.org
 ________________________________________________________________________________
 
 
 KISS Wayland Repository
 ________________________________________________________________________________
 
-A KISS repository for Wayland.
+A KISS Linux repository for Wayland packages.
 
 After the archival of sdsddsd1's mywayland[1] repo I needed a way to continue
 getting updates to my wayland install, and thus kiss-wayland was born.
@@ -15,11 +15,11 @@ If a package you used/want is missing, feel free to make a pr adding it the
 repo, so far I've only got the ones I use added.
 
 To use this repo you should have the following repositories in your KISS_PATH:
- - kisslinux/repo/*     [2]
- - kisslinux/community  [3]
+ - kisslinux/repo/*    [2]
+ - kisslinux/community [3]
 
 
-Licenses
+License
 ________________________________________________________________________________
 
 All files in this repository are available under the BSD Zero Clause license.
