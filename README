@@ -19,6 +19,16 @@ To use this repo you should have the following repositories in your KISS_PATH:
  - kisslinux/community [3]
 
 
+Mirrors
+________________________________________________________________________________
+
+This git repository is mirrored to the following locations:
+
+ - https://git.himmalerin.net/kiss-wayland
+ - https://github.com/Himmalerin/kiss-wayland
+ - https://git.sr.ht/~himmalerin/kiss-wayland
+
+
 License
 ________________________________________________________________________________
 
