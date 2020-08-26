@@ -44,8 +44,8 @@ nodejs        make
 pango
 perl          make
 pixman
+pkgconf       make
 python        make
-python2       make
 rust          make
 wayland
 zip           make
