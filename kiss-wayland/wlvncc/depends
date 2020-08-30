@@ -1,0 +1,11 @@
+gnutls
+libgcrypt
+libgpg-error
+libjpeg-turbo
+libressl
+libvncserver
+libxkbcommon
+nettle
+pixman
+wayland
+zlib
