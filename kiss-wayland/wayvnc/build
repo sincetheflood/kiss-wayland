@@ -1,0 +1,12 @@
+#!/bin/sh -e
+
+meson build
+ninja -C build
+
+mkdir -p $1/usr/bin
+mkdir -p $1/usr/lib
+
+install -Dm755 build/wayvnc                                  "$1/usr/bin/wayvnc"
+install -Dm644 build/subprojects/neatvnc/libneatvnc.so       "$1/usr/lib/libneatvnc.so"
+install -Dm644 build/subprojects/neatvnc/libneatvnc.so.0     "$1/usr/lib/libneatvnc.so.0"
+install -Dm644 build/subprojects/neatvnc/libneatvnc.so.0.0.0 "$1/usr/lib/libneatvnc.so.0.0.0"

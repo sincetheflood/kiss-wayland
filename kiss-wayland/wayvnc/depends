@@ -1,0 +1,8 @@
+gnutls
+libjpeg-turbo
+libxkbcommon
+nettle
+pixman
+wayland
+wlvncc
+zlib

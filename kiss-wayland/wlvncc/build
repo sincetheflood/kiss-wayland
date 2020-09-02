@@ -1,0 +1,10 @@
+#!/bin/sh -e
+
+meson build
+ninja -C build
+
+mkdir -p $1/usr/bin
+install -Dm755 build/wlvncc "$1/usr/bin/wlvncc"
+install -Dm644 build/subprojects/aml/libaml.so               "$1/usr/lib/libaml.so"
+install -Dm644 build/subprojects/aml/libaml.so.0             "$1/usr/lib/libaml.so.0"
+install -Dm644 build/subprojects/aml/libaml.so.0.0.0         "$1/usr/lib/libaml.so.0.0.0"
