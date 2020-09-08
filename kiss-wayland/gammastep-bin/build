@@ -1,0 +1,7 @@
+#!/bin/sh -e
+
+install -Dm755 gammastep   "$1/usr/bin/gammastep"
+install -Dm644 gammastep.1 "$1/usr/share/man/man1/gammastep.1"
+
+install -Dm644 gammastep.desktop "$1/usr/share/applications/gammastep.desktop"
+install -Dm644 icons/*.svg    -t "$1/usr/share/icons/hicolor/scalable/apps/"
