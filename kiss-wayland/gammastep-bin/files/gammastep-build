@@ -3,7 +3,7 @@
 # Script used to build gammastep in an alpine chroot.
 # Build artifacts can be found in the ./gammastep-v$ver/output/ folder.
 
-# Set g_ver to the version of gammastep you're trying to build
+# Set ver to the version of gammastep you're trying to build
 ver=2.0.2
 
 # Install required dependencies
