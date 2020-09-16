@@ -1,0 +1,13 @@
+#!/bin/sh
+
+cat <<EOF
+
+NOTE: To properly set foot's font, cp the config file
+      in /usr/share/foot/footrc to ~/.config/footrc
+      and uncomment the font=monospace line.
+
+NOTE: In a future release of foot (1.5) the config
+      file's default location will be changing from
+      ~/.config/footrc to ~/.config/foot/foot.ini.
+
+EOF
