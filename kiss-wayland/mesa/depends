@@ -16,7 +16,7 @@ llvm
 m4            make
 meson         make
 python        make
-wayland       make
+wayland
 wayland-protocols
 xorgproto
 zlib
