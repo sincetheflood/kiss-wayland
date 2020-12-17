@@ -6,4 +6,8 @@ NOTE: To properly set foot's font, copy the config file
       in /usr/share/foot/footrc to ~/.config/foot/foot.ini
       and uncomment the font=monospace line.
 
+NOTE: The foot terminfo needs to be installed manually on
+      most hosts. You can copy /usr/share/terminfo/f/foot
+      to ~/.terminfo/f/foot to make sure all keybinds work.
+
 EOF
