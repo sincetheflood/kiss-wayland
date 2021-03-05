@@ -46,6 +46,5 @@ pixman
 pkgconf       make
 python        make
 rust          make
-wayland
 zip           make
 zlib
