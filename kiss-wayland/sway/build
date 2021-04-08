@@ -1,22 +1,10 @@
 #!/bin/sh -e
 
-:> nostrip
-
-#GCC10 fix
-#export CFLAGS="$CFLAGS -Wno-error -fcommon"
-
 export DESTDIR="$1"
 
 meson \
     --prefix=/usr \
-    -Dexamples=false \
-    -Dxwayland=enabled \
-    . build
+    . output
 
-ninja -C build
-ninja -C build install
-
-#rm -rf "$1/usr/share/zsh/"
-#rm -rf "$1/usr/share/wayland-sessions/"
-#rm -rf "$1/usr/share/fish/"
-#rm -rf "$1/usr/share/bash-completion/"
+ninja -C output
+ninja -C output install

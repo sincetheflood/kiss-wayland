@@ -1,13 +1,16 @@
 cairo
-flex make
-gdk-pixbuf
+eudev
+glib
 json-c
+libevdev
+libinput
+libxcb
+libxkbcommon
 linux-headers make
-meson make
+mesa
 pango
 pcre
-samurai make
-scdoc
+pixman
 swaybg
 wayland
 wayland-protocols make
