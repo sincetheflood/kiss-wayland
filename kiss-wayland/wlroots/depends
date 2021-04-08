@@ -1,11 +1,16 @@
 eudev
-flex make
+libdrm
 libinput
+libxcb
 libxkbcommon
 linux-headers make
-mesa 
-meson make
+mesa
+meson               make
 pixman
-samurai make
-wayland-protocols make
-xkeyboard-config
+samurai             make
+util-linux
+wayland
+wayland-protocols   make
+xcb-util-renderutil
+xcb-util-wm
+xorg-server

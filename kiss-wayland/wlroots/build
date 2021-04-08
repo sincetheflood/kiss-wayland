@@ -1,24 +1,18 @@
 #!/bin/sh -e
 
-:> nostrip
-
-#GCC10 fix
-export CFLAGS="$CFLAGS -fcommon"
-
 export DESTDIR="$1"
 
-meson \
-	--prefix=/usr \
-	-Dexamples=false \
-        -Dlibcap=disabled \
-        -Dlogind=disabled \
-        -Dxcb-errors=disabled \
-        -Dxcb-icccm=disabled \
-        -Dxcb-xkb=disabled \
-        -Dxwayland=enabled \
-        -Dx11-backend=enabled \
-	-Dfreerdp=disabled \
-	. build
+# Don't fail on building xcursor.c
+# See https://github.com/swaywm/wlroots/issues/2777
+export CFLAGS="$CFLAGS -Wno-error"
 
-ninja -C build
-ninja -C build install
+meson \
+    --prefix=/usr \
+    -Dexamples=false \
+    -Dxwayland=enabled \
+    -Dx11-backend=enabled \
+    -Dxdg-foreign=enabled \
+    . output
+
+ninja -C output
+ninja -C output install
