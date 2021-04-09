@@ -227,169 +227,6 @@ index 4cc7d89..d35bcb9 100644
    GdkDisplay* display = gdk_display_get_default();
    if (display) {
      waylandBackend = !GDK_IS_X11_DISPLAY(display);
-diff --git a/dom/plugins/base/nsPluginInstanceOwner.cpp b/dom/plugins/base/nsPluginInstanceOwner.cpp
-index a1a7a2a..8334604 100644
---- a/dom/plugins/base/nsPluginInstanceOwner.cpp
-+++ b/dom/plugins/base/nsPluginInstanceOwner.cpp
-@@ -4,7 +4,7 @@
-  * License, v. 2.0. If a copy of the MPL was not distributed with this
-  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
- 
--#ifdef MOZ_X11
-+#if 0
- #  include <cairo-xlib.h>
- #  include "gfxXlibSurface.h"
- /* X headers suck */
-@@ -72,7 +72,7 @@ static NS_DEFINE_CID(kAppShellCID, NS_APPSHELL_CID);
- #  include "mozilla/widget/WinMessages.h"
- #endif  // #ifdef XP_WIN
- 
--#ifdef MOZ_WIDGET_GTK
-+#if 0
- #  include <gdk/gdk.h>
- #  include <gtk/gtk.h>
- #endif
-@@ -637,7 +637,7 @@ NS_IMETHODIMP nsPluginInstanceOwner::GetNetscapeWindow(void* value) {
-   }
- 
-   return NS_OK;
--#elif defined(MOZ_WIDGET_GTK) && defined(MOZ_X11)
-+#elif 0
-   // X11 window managers want the toplevel window for WM_TRANSIENT_FOR.
-   nsIWidget* win = mPluginFrame->GetNearestWidget();
-   if (!win) return NS_ERROR_FAILURE;
-@@ -1676,7 +1676,7 @@ nsresult nsPluginInstanceOwner::HandleEvent(Event* aEvent) {
-   return NS_OK;
- }
- 
--#ifdef MOZ_X11
-+#if 0
- static unsigned int XInputEventState(const WidgetInputEvent& anEvent) {
-   unsigned int state = 0;
-   if (anEvent.IsShift()) state |= ShiftMask;
-@@ -2103,7 +2103,7 @@ nsEventStatus nsPluginInstanceOwner::ProcessEvent(
-   }
- #endif
- 
--#ifdef MOZ_X11
-+#if 0
-   // this code supports windowless plugins
-   nsIWidget* widget = anEvent.mWidget;
-   XEvent pluginEvent = XEvent();
-@@ -2134,7 +2134,7 @@ nsEventStatus nsPluginInstanceOwner::ProcessEvent(
-       if (widget) {
-         rootPoint = anEvent.mRefPoint + widget->WidgetToScreenOffset();
-       }
--#  ifdef MOZ_WIDGET_GTK
-+#  if 0
-       Window root = GDK_ROOT_WINDOW();
- #  else
-       Window root = X11None;  // Could XQueryTree, but this is not important.
-@@ -2212,7 +2212,7 @@ nsEventStatus nsPluginInstanceOwner::ProcessEvent(
-     case eKeyboardEventClass:
-       if (anEvent.mPluginEvent) {
-         XKeyEvent& event = pluginEvent.xkey;
--#  ifdef MOZ_WIDGET_GTK
-+#  if 0
-         event.root = GDK_ROOT_WINDOW();
-         event.time = anEvent.mTime;
-         const GdkEventKey* gdkEvent =
-@@ -2396,7 +2396,7 @@ void nsPluginInstanceOwner::Paint(const RECT& aDirty, HDC aDC) {
- }
- #endif
- 
--#if defined(MOZ_X11)
-+#if 0
- void nsPluginInstanceOwner::Paint(gfxContext* aContext,
-                                   const gfxRect& aFrameRect,
-                                   const gfxRect& aDirtyRect) {
-@@ -2530,7 +2530,7 @@ nsresult nsPluginInstanceOwner::Renderer::DrawWithXlib(
- 
-   NPSetWindowCallbackStruct* ws_info =
-       static_cast<NPSetWindowCallbackStruct*>(mWindow->ws_info);
--#  ifdef MOZ_X11
-+#  if 0
-   if (ws_info->visual != visual || ws_info->colormap != colormap) {
-     ws_info->visual = visual;
-     ws_info->colormap = colormap;
-@@ -2741,7 +2741,7 @@ NS_IMETHODIMP nsPluginInstanceOwner::CreateWidget(void) {
-     // passing HDC till paint event when it is really
-     // needed. Change spec?
-     mPluginWindow->window = nullptr;
--#ifdef MOZ_X11
-+#if 0
-     // Fill in the display field.
-     NPSetWindowCallbackStruct* ws_info =
-         static_cast<NPSetWindowCallbackStruct*>(mPluginWindow->ws_info);
-diff --git a/dom/plugins/base/nsPluginInstanceOwner.h b/dom/plugins/base/nsPluginInstanceOwner.h
-index a868c22..382c82f 100644
---- a/dom/plugins/base/nsPluginInstanceOwner.h
-+++ b/dom/plugins/base/nsPluginInstanceOwner.h
-@@ -31,7 +31,7 @@ class nsPluginDOMContextMenuListener;
- class nsPluginFrame;
- class nsDisplayListBuilder;
- 
--#if defined(MOZ_X11)
-+#if 0
- class gfxContext;
- #endif
- 
-@@ -48,7 +48,7 @@ class PuppetWidget;
- 
- using mozilla::widget::PuppetWidget;
- 
--#ifdef MOZ_X11
-+#if 0
- #  include "gfxXlibNativeRenderer.h"
- #endif
- 
-@@ -113,7 +113,7 @@ class nsPluginInstanceOwner final : public nsIPluginInstanceOwner,
-   void Paint(const gfxRect& aDirtyRect, CGContextRef cgContext);
-   void RenderCoreAnimation(CGContextRef aCGContext, int aWidth, int aHeight);
-   void DoCocoaEventDrawRect(const gfxRect& aDrawRect, CGContextRef cgContext);
--#elif defined(MOZ_X11)
-+#elif 0
-   void Paint(gfxContext* aContext, const gfxRect& aFrameRect,
-              const gfxRect& aDirtyRect);
- #endif
-@@ -194,7 +194,7 @@ class nsPluginInstanceOwner final : public nsIPluginInstanceOwner,
-     return "";
-   }
- 
--#ifdef MOZ_X11
-+#if 0
-   void GetPluginDescription(nsACString& aDescription) {
-     aDescription.Truncate();
-     if (mInstance && mPluginHost) {
-@@ -215,7 +215,7 @@ class nsPluginInstanceOwner final : public nsIPluginInstanceOwner,
-     return mPluginWindow->type == NPWindowTypeDrawable &&
-            (MatchPluginName("Shockwave Flash") ||
-             MatchPluginName("Test Plug-in"));
--#elif defined(MOZ_X11) || defined(XP_MACOSX)
-+#elif defined(XP_MACOSX)
-     return true;
- #else
-     return false;
-@@ -323,7 +323,7 @@ class nsPluginInstanceOwner final : public nsIPluginInstanceOwner,
-   uint32_t mLastEventloopNestingLevel;
-   bool mContentFocused;
-   bool mWidgetVisible;  // used on Mac to store our widget's visible state
--#ifdef MOZ_X11
-+#if 0
-   // Used with windowless plugins only, initialized in CreateWidget().
-   bool mFlash10Quirks;
- #endif
-@@ -369,7 +369,7 @@ class nsPluginInstanceOwner final : public nsIPluginInstanceOwner,
- 
-   int mLastMouseDownButtonType;
- 
--#ifdef MOZ_X11
-+#if 0
-   class Renderer : public gfxXlibNativeRenderer {
-    public:
-     Renderer(NPWindow* aWindow, nsPluginInstanceOwner* aInstanceOwner,
-diff --git a/dom/plugins/base/nsPluginNativeWindow.cpp b/dom/plugins/base/nsPluginNativeWindow.cpp
-index 73da098..44554cf 100644
 --- a/dom/plugins/base/nsPluginNativeWindow.cpp
 +++ b/dom/plugins/base/nsPluginNativeWindow.cpp
 @@ -17,7 +17,7 @@ class nsPluginNativeWindowImpl : public nsPluginNativeWindow {
@@ -1274,106 +1111,6 @@ index e11a3ba..1cfaf8c 100644
  #  include "gfxXlibNativeRenderer.h"
  #endif
  
-diff --git a/old-configure b/old-configure
-index 621aa58..14a23b3 100644
---- a/old-configure
-+++ b/old-configure
-@@ -746,7 +746,6 @@ GLIB_VERSION=2.42
- GLIB_VERSION_MIN_REQUIRED=GLIB_VERSION_2_42
- GLIB_VERSION_MAX_ALLOWED=GLIB_VERSION_2_42
- CAIRO_VERSION=1.10
--GTK2_VERSION=2.18.0
- GTK3_VERSION=3.14.0
- GDK_VERSION_MAX_ALLOWED=GDK_VERSION_3_14
- W32API_VERSION=3.14
-@@ -7890,78 +7889,6 @@ cat >> confdefs.h <<EOF
- EOF
- 
-   fi
--  if test "$MOZ_ENABLE_GTK"; then
--    cat >> confdefs.pytmp <<EOF
--    (''' GLIB_VERSION_MIN_REQUIRED ''', r''' $GLIB_VERSION_MIN_REQUIRED ''')
--EOF
--cat >> confdefs.h <<EOF
--#define GLIB_VERSION_MIN_REQUIRED $GLIB_VERSION_MIN_REQUIRED
--EOF
--
--    cat >> confdefs.pytmp <<EOF
--    (''' GLIB_VERSION_MAX_ALLOWED ''', r''' $GLIB_VERSION_MAX_ALLOWED ''')
--EOF
--cat >> confdefs.h <<EOF
--#define GLIB_VERSION_MAX_ALLOWED $GLIB_VERSION_MAX_ALLOWED
--EOF
--
--
--    if test "$MOZ_X11"; then
--      succeeded=no
--
--  if test -z "$PKG_CONFIG"; then
--     echo "*** The pkg-config script could not be found. Make sure it is"
--     echo "*** in your path, or set the PKG_CONFIG environment variable"
--     echo "*** to the full path to pkg-config."
--     echo "*** Or see http://www.freedesktop.org/software/pkgconfig to get pkg-config."
--  else
--     PKG_CONFIG_MIN_VERSION=0.9.0
--     if $PKG_CONFIG --atleast-pkgconfig-version $PKG_CONFIG_MIN_VERSION; then
--        echo $ac_n "checking for gtk+-2.0 >= $GTK2_VERSION gtk+-unix-print-2.0 glib-2.0 >= $GLIB_VERSION gobject-2.0 gio-unix-2.0 gdk-x11-2.0""... $ac_c" 1>&6
--echo "configure:7922: checking for gtk+-2.0 >= $GTK2_VERSION gtk+-unix-print-2.0 glib-2.0 >= $GLIB_VERSION gobject-2.0 gio-unix-2.0 gdk-x11-2.0" >&5
--
--        if $PKG_CONFIG --exists "gtk+-2.0 >= $GTK2_VERSION gtk+-unix-print-2.0 glib-2.0 >= $GLIB_VERSION gobject-2.0 gio-unix-2.0 gdk-x11-2.0" ; then
--            echo "$ac_t""yes" 1>&6
--            succeeded=yes
--
--            echo $ac_n "checking MOZ_GTK2_CFLAGS""... $ac_c" 1>&6
--echo "configure:7929: checking MOZ_GTK2_CFLAGS" >&5
--            MOZ_GTK2_CFLAGS=`$PKG_CONFIG --cflags "gtk+-2.0 >= $GTK2_VERSION gtk+-unix-print-2.0 glib-2.0 >= $GLIB_VERSION gobject-2.0 gio-unix-2.0 gdk-x11-2.0"`
--            echo "$ac_t""$MOZ_GTK2_CFLAGS" 1>&6
--
--            echo $ac_n "checking MOZ_GTK2_LIBS""... $ac_c" 1>&6
--echo "configure:7934: checking MOZ_GTK2_LIBS" >&5
--            ## Remove evil flags like -Wl,--export-dynamic
--            MOZ_GTK2_LIBS="`$PKG_CONFIG --libs \"gtk+-2.0 >= $GTK2_VERSION gtk+-unix-print-2.0 glib-2.0 >= $GLIB_VERSION gobject-2.0 gio-unix-2.0 gdk-x11-2.0\" |sed s/-Wl,--export-dynamic//g`"
--            echo "$ac_t""$MOZ_GTK2_LIBS" 1>&6
--        else
--            MOZ_GTK2_CFLAGS=""
--            MOZ_GTK2_LIBS=""
--            ## If we have a custom action on failure, don't print errors, but 
--            ## do set a variable so people can do so.
--            MOZ_GTK2_PKG_ERRORS=`$PKG_CONFIG --errors-to-stdout --print-errors "gtk+-2.0 >= $GTK2_VERSION gtk+-unix-print-2.0 glib-2.0 >= $GLIB_VERSION gobject-2.0 gio-unix-2.0 gdk-x11-2.0"`
--            echo $MOZ_GTK2_PKG_ERRORS
--        fi
--
--        
--        
--     else
--        echo "*** Your version of pkg-config is too old. You need version $PKG_CONFIG_MIN_VERSION or newer."
--        echo "*** See http://www.freedesktop.org/software/pkgconfig"
--     fi
--  fi
--
--  if test $succeeded = yes; then
--     :
--  else
--     if test "$COMPILE_ENVIRONMENT"; then 
--       { echo "configure: error: Library requirements (gtk+-2.0 >= $GTK2_VERSION gtk+-unix-print-2.0 glib-2.0 >= $GLIB_VERSION gobject-2.0 gio-unix-2.0 gdk-x11-2.0) not met; consider adjusting the PKG_CONFIG_PATH environment variable if your libraries are in a nonstandard prefix so pkg-config can find them." 1>&2; echo "configure: error: Library requirements (gtk+-2.0 >= $GTK2_VERSION gtk+-unix-print-2.0 glib-2.0 >= $GLIB_VERSION gobject-2.0 gio-unix-2.0 gdk-x11-2.0) not met; consider adjusting the PKG_CONFIG_PATH environment variable if your libraries are in a nonstandard prefix so pkg-config can find them." 1>&5; exit 1; }
--     fi
--  fi
--
--      MOZ_GTK2_CFLAGS="-I${_topsrcdir}/widget/gtk/compat $MOZ_GTK2_CFLAGS"
--    fi
--  fi
- fi # COMPILE_ENVIRONMENT
- 
- 
-@@ -10577,8 +10504,6 @@ sed 's/$/,/' >> $CONFIG_STATUS <<EOF
-     (''' MOZ_ANDROID_MAX_SDK_VERSION ''', r''' $MOZ_ANDROID_MAX_SDK_VERSION ''')
-     (''' MOZ_GTK3_CFLAGS ''', list(split(r''' $MOZ_GTK3_CFLAGS ''')))
-     (''' MOZ_GTK3_LIBS ''', list(split(r''' $MOZ_GTK3_LIBS ''')))
--    (''' MOZ_GTK2_CFLAGS ''', list(split(r''' $MOZ_GTK2_CFLAGS ''')))
--    (''' MOZ_GTK2_LIBS ''', list(split(r''' $MOZ_GTK2_LIBS ''')))
-     (''' MOZ_FS_LAYOUT ''', r''' $MOZ_FS_LAYOUT ''')
-     (''' TK_CFLAGS ''', list(split(r''' $TK_CFLAGS ''')))
-     (''' TK_LIBS ''', list(split(r''' $TK_LIBS ''')))
 diff --git a/widget/gtk/mozgtk/gtk2/moz.build b/widget/gtk/mozgtk/gtk2/moz.build
 deleted file mode 100644
 index 93e43c3..0000000
@@ -1503,3 +1240,128 @@ index 5bfdcd9..95caf91 100644
  #  include "base/thread.h"
  #  include "WaylandVsyncSource.h"
  #endif
+--- a/old-configure
++++ b/old-configure
+@@ -746,7 +746,6 @@
+ GLIB_VERSION_MIN_REQUIRED=GLIB_VERSION_2_42
+ GLIB_VERSION_MAX_ALLOWED=GLIB_VERSION_2_42
+ CAIRO_VERSION=1.10
+-GTK2_VERSION=2.18.0
+ GTK3_VERSION=3.14.0
+ GDK_VERSION_MAX_ALLOWED=GDK_VERSION_3_14
+ W32API_VERSION=3.14
+@@ -7904,85 +7903,6 @@
+ EOF
+ 
+   fi
+-  if test "$MOZ_ENABLE_GTK"; then
+-    cat >> confdefs.pytmp <<EOF
+-    (''' GLIB_VERSION_MIN_REQUIRED ''', r''' $GLIB_VERSION_MIN_REQUIRED ''')
+-EOF
+-cat >> confdefs.h <<EOF
+-#define GLIB_VERSION_MIN_REQUIRED $GLIB_VERSION_MIN_REQUIRED
+-EOF
+-
+-    cat >> confdefs.pytmp <<EOF
+-    (''' GLIB_VERSION_MAX_ALLOWED ''', r''' $GLIB_VERSION_MAX_ALLOWED ''')
+-EOF
+-cat >> confdefs.h <<EOF
+-#define GLIB_VERSION_MAX_ALLOWED $GLIB_VERSION_MAX_ALLOWED
+-EOF
+-
+-
+-    if test "$MOZ_X11"; then
+-      succeeded=no
+-
+-  if test -z "$PKG_CONFIG"; then
+-     echo "*** The pkg-config script could not be found. Make sure it is"
+-     echo "*** in your path, or set the PKG_CONFIG environment variable"
+-     echo "*** to the full path to pkg-config."
+-     echo "*** Or see http://www.freedesktop.org/software/pkgconfig to get pkg-config."
+-  else
+-     PKG_CONFIG_MIN_VERSION=0.9.0
+-     if $PKG_CONFIG --atleast-pkgconfig-version $PKG_CONFIG_MIN_VERSION; then
+-        echo $ac_n "checking for gtk+-2.0 >= $GTK2_VERSION gtk+-unix-print-2.0 glib-2.0 >= $GLIB_VERSION gobject-2.0 gio-unix-2.0 gdk-x11-2.0""... $ac_c" 1>&6
+-echo "configure:7936: checking for gtk+-2.0 >= $GTK2_VERSION gtk+-unix-print-2.0 glib-2.0 >= $GLIB_VERSION gobject-2.0 gio-unix-2.0 gdk-x11-2.0" >&5
+-
+-        if test -n "$PKG_CONFIG_SYSROOT_DIR"; then
+-            export PKG_CONFIG_SYSROOT_DIR
+-        fi
+-        if test -n "$PKG_CONFIG_LIBDIR"; then
+-            export PKG_CONFIG_LIBDIR
+-        fi
+-
+-        if $PKG_CONFIG --exists "gtk+-2.0 >= $GTK2_VERSION gtk+-unix-print-2.0 glib-2.0 >= $GLIB_VERSION gobject-2.0 gio-unix-2.0 gdk-x11-2.0" ; then
+-            echo "$ac_t""yes" 1>&6
+-            succeeded=yes
+-
+-            echo $ac_n "checking MOZ_GTK2_CFLAGS""... $ac_c" 1>&6
+-echo "configure:7950: checking MOZ_GTK2_CFLAGS" >&5
+-            MOZ_GTK2_CFLAGS=`$PKG_CONFIG --cflags "gtk+-2.0 >= $GTK2_VERSION gtk+-unix-print-2.0 glib-2.0 >= $GLIB_VERSION gobject-2.0 gio-unix-2.0 gdk-x11-2.0"`
+-            echo "$ac_t""$MOZ_GTK2_CFLAGS" 1>&6
+-
+-            echo $ac_n "checking MOZ_GTK2_LIBS""... $ac_c" 1>&6
+-echo "configure:7955: checking MOZ_GTK2_LIBS" >&5
+-            ## Remove evil flags like -Wl,--export-dynamic
+-            MOZ_GTK2_LIBS="`$PKG_CONFIG --libs \"gtk+-2.0 >= $GTK2_VERSION gtk+-unix-print-2.0 glib-2.0 >= $GLIB_VERSION gobject-2.0 gio-unix-2.0 gdk-x11-2.0\" |sed s/-Wl,--export-dynamic//g`"
+-            echo "$ac_t""$MOZ_GTK2_LIBS" 1>&6
+-        else
+-            MOZ_GTK2_CFLAGS=""
+-            MOZ_GTK2_LIBS=""
+-            ## If we have a custom action on failure, don't print errors, but 
+-            ## do set a variable so people can do so.
+-            MOZ_GTK2_PKG_ERRORS=`$PKG_CONFIG --errors-to-stdout --print-errors "gtk+-2.0 >= $GTK2_VERSION gtk+-unix-print-2.0 glib-2.0 >= $GLIB_VERSION gobject-2.0 gio-unix-2.0 gdk-x11-2.0"`
+-            echo $MOZ_GTK2_PKG_ERRORS
+-        fi
+-
+-        
+-        
+-     else
+-        echo "*** Your version of pkg-config is too old. You need version $PKG_CONFIG_MIN_VERSION or newer."
+-        echo "*** See http://www.freedesktop.org/software/pkgconfig"
+-     fi
+-  fi
+-
+-  if test $succeeded = yes; then
+-     :
+-  else
+-     if test "$COMPILE_ENVIRONMENT"; then 
+-       { echo "configure: error: Library requirements (gtk+-2.0 >= $GTK2_VERSION gtk+-unix-print-2.0 glib-2.0 >= $GLIB_VERSION gobject-2.0 gio-unix-2.0 gdk-x11-2.0) not met; consider adjusting the PKG_CONFIG_PATH environment variable if your libraries are in a nonstandard prefix so pkg-config can find them." 1>&2; echo "configure: error: Library requirements (gtk+-2.0 >= $GTK2_VERSION gtk+-unix-print-2.0 glib-2.0 >= $GLIB_VERSION gobject-2.0 gio-unix-2.0 gdk-x11-2.0) not met; consider adjusting the PKG_CONFIG_PATH environment variable if your libraries are in a nonstandard prefix so pkg-config can find them." 1>&5; exit 1; }
+-     fi
+-  fi
+-
+-      MOZ_GTK2_CFLAGS="-I${_topsrcdir}/widget/gtk/compat $MOZ_GTK2_CFLAGS"
+-    fi
+-  fi
+ fi # COMPILE_ENVIRONMENT
+ 
+ 
+@@ -10640,8 +10560,6 @@
+     (''' MOZ_ANDROID_MAX_SDK_VERSION ''', r''' $MOZ_ANDROID_MAX_SDK_VERSION ''')
+     (''' MOZ_GTK3_CFLAGS ''', list(split(r''' $MOZ_GTK3_CFLAGS ''')))
+     (''' MOZ_GTK3_LIBS ''', list(split(r''' $MOZ_GTK3_LIBS ''')))
+-    (''' MOZ_GTK2_CFLAGS ''', list(split(r''' $MOZ_GTK2_CFLAGS ''')))
+-    (''' MOZ_GTK2_LIBS ''', list(split(r''' $MOZ_GTK2_LIBS ''')))
+     (''' MOZ_FS_LAYOUT ''', r''' $MOZ_FS_LAYOUT ''')
+     (''' TK_CFLAGS ''', list(split(r''' $TK_CFLAGS ''')))
+     (''' TK_LIBS ''', list(split(r''' $TK_LIBS ''')))
+--- a/dom/plugins/base/nsPluginInstanceOwner.cpp
++++ b/dom/plugins/base/nsPluginInstanceOwner.cpp
+@@ -1266,7 +1266,7 @@
+ void nsPluginInstanceOwner::Paint(const RECT& aDirty, HDC aDC) { return; }
+ #endif
+ 
+-#if defined(MOZ_X11)
++#if 0
+ void nsPluginInstanceOwner::Paint(gfxContext* aContext,
+                                   const gfxRect& aFrameRect,
+                                   const gfxRect& aDirtyRect) {
+@@ -1491,7 +1491,7 @@
+     // passing HDC till paint event when it is really
+     // needed. Change spec?
+     mPluginWindow->window = nullptr;
+-#ifdef MOZ_X11
++#if 0
+     // Fill in the display field.
+     NPSetWindowCallbackStruct* ws_info =
+         static_cast<NPSetWindowCallbackStruct*>(mPluginWindow->ws_info);

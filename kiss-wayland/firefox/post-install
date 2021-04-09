@@ -2,6 +2,9 @@
 
 cat <<EOF
 
+NOTE: Launch with 'MOZ_ENABLE_WAYLAND=1' to run
+      with the wayland backend.
+
 NOTE: Install the 'hicolor-icon-theme' package if
       no other icon themes are installed.
 
