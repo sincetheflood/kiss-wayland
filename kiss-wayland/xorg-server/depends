@@ -1,5 +1,4 @@
 bzip2
-font-util make
 freetype-harfbuzz
 libX11
 libXau
@@ -18,10 +17,10 @@ libxkbfile
 libxshmfence
 linux-headers make
 mesa
-nettle
 pixman
 wayland
 wayland-protocols make
+pkgconf make
 xkeyboard-config
 xtrans make
 zlib
